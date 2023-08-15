@@ -1,0 +1,5 @@
+﻿l_english:
+ actual_tech_chain_title:0 "Actual empire output"
+ actual_tech_chain_desc:0 "This shows an empire key productions accounting for empire size/ research speed. \n\n §BResearch output: [owner.lyra_true_tech]§! \n §BUnity output: [owner.lyra_true_tradition]§! \n §BAlloys output: [owner.true_alloys_max]§! \n §BTotal pops: [owner.true_pops_max]§!"
+ actual_tech_host_chain_title:0 "Strongest empires"
+ actual_tech_host_chain_desc:0 "This shows the top 4 empires, top tech, top alloy, top unity, top pops \n\n Research output: §B[event_target:lyra_true_tech_max.lyra_true_tech]§! by the [event_target:lyra_true_tech_max.GetName] \n Unity output: §G[event_target:lyra_true_tradition_max.lyra_true_tradition]§! by the [event_target:lyra_true_tradition_max.GetName] \n Alloys output: §r[event_target:true_alloys_max_max.true_pops_max]§! by the [event_target:true_alloys_max_max.GetName] \n Total pops: §C[event_target:true_pops_max_max.true_pops_max]§! by the [event_target:true_pops_max_max.GetName]§!"
