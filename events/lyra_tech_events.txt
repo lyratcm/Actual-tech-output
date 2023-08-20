@@ -5,48 +5,24 @@ country_event = {
 	fire_only_once = yes
 
 	immediate = {
-		if = {
-			limit = {
-				not = {
-					has_country_flag = is_host
-				}
-			}
-			set_country_flag = is_host
+		inverted_switch = {
+			trigger = has_country_flag
+			is_host = { set_country_flag = is_host }
 		}
 		every_country = {
-			set_variable = {
-				which = lyra_true_tech
-				value = value:true_tech
-			}
-			set_variable = {
-				which = lyra_true_tradition
-				value = value:true_tradition
-			}
-			set_variable = {
-				which = true_alloys_max
-				value = value:true_alloys_max
-			}
-			set_variable = {
-				which = true_pops_max
-				value = value:true_pops_max
-			}
+			set_variable = { which = lyra_true_tech value = value:true_tech }
+			set_variable = { which = lyra_true_tradition value = value:true_tradition }
+			set_variable = { which = lyra_true_alloys value = value:true_alloys }
+			set_variable = { which = lyra_true_pops value = value:true_pops }
 			inverted_switch = {
 				trigger = has_event_chain
 				actual_tech_chain = { begin_event_chain = { event_chain = "actual_tech_chain" target = ROOT } }
 				actual_tech_host_chain = { begin_event_chain = { event_chain = "actual_tech_host_chain" target = ROOT } }
 			}
-			#begin_event_chain = {
-			#	event_chain = "actual_tech_chain"
-			#	target = ROOT
-			#}
-			#begin_event_chain = {
-			#		event_chain = "actual_tech_host_chain"
-			#		target = ROOT
-			#}
-			country_event = {
-				id = lyra_true_tech.2
-				days = 29
-			}
+		}
+		country_event = {
+			id = lyra_true_tech.2
+			days = 29
 		}
 	}
 }
@@ -57,93 +33,27 @@ country_event = {
 	is_triggered_only = yes
 
 	immediate = {
+		#make sure country has event chain - backup
 		inverted_switch = {
 			trigger = has_event_chain
 			actual_tech_chain = { begin_event_chain = { event_chain = "actual_tech_chain" target = ROOT } }
 			actual_tech_host_chain = { begin_event_chain = { event_chain = "actual_tech_host_chain" target = ROOT } }
 		}
-		set_variable = {
-			which = lyra_true_tech
-			value = value:true_tech
+		every_country = {
+			set_variable = { which = lyra_true_tech value = value:true_tech }
+			set_variable = { which = lyra_true_tradition value = value:true_tradition }
+			set_variable = { which = lyra_true_alloys value = value:true_alloys }
+			set_variable = { which = lyra_true_pops value = value:true_pops }
 		}
-		set_variable = {
-			which = lyra_true_tradition
-			value = value:true_tradition
-		}
-		set_variable = {
-			which = true_alloys_max
-			value = value:true_alloys_max
-		}
-		set_variable = {
-			which = true_pops_max
-			value = value:true_pops_max
-		}
-		#inverted_switch = {
-		#	trigger = is_scope_set
-		#	event_target:lyra_true_tech_max = { save_global_event_target_as = lyra_true_tech_max }
-		#	event_target:lyra_true_tradition_max = { save_global_event_target_as = lyra_true_tradition_max }
-		#	event_target:true_alloys_max_max = { save_global_event_target_as = true_alloys_max_max }
-		#	event_target:true_pops_max_max = { save_global_event_target_as = true_pops_max_max }
-		#}
-		if = {
-			limit = {
-				has_country_flag = is_host
-			}
-			#default to host in 1 empire game and reset each month
-			save_global_event_target_as = lyra_true_tech_max
-			save_global_event_target_as = lyra_true_tradition_max
-			save_global_event_target_as = true_alloys_max_max
-			save_global_event_target_as = true_pops_max_max
-			every_country = {
-				inverted_switch = {
-					trigger = is_variable_set
-					lyra_true_tech = { set_variable = { which = lyra_true_tech value = value:true_tech } }
-					lyra_true_tradition = { set_variable = { which = lyra_true_tradition value = value:true_tradition } }
-					true_alloys_max = { set_variable = { which = true_alloys_max value = value:true_alloys_max } }
-					true_pops_max = { set_variable = { which = true_pops_max value = value:true_pops_max } }
-				}
-				if = { limit = { check_variable = { which = event_target:lyra_true_tech_max.lyra_true_tech value < lyra_true_tech } }  save_global_event_target_as = lyra_true_tech_max }
-				if = { limit = { check_variable = { which = event_target:lyra_true_tradition_max.lyra_true_tradition value < lyra_true_tradition }  } save_global_event_target_as = lyra_true_tradition_max }
-				if = { limit = { check_variable = { which = event_target:true_alloys_max_max.true_alloys_max value < true_alloys_max } } save_global_event_target_as = true_alloys_max_max }
-				if = { limit = { check_variable = { which = event_target:true_pops_max_max.true_pops_max value < true_pops_max } }  save_global_event_target_as = true_pops_max_max }
-			}
-		}
+		#runs ordered country which looks at all countries and takes the one with the highest (but can be lowest) value of that and then does an effect on that country,
+		# TRUE_VALUE replaces the order_by and event target set values
+		ordered_country_true_value = { TRUE_VALUE = true_tech }
+		ordered_country_true_value = { TRUE_VALUE = true_tradition }
+		ordered_country_true_value = { TRUE_VALUE = true_alloys }
+		ordered_country_true_value = { TRUE_VALUE = true_pops }
 		country_event = {
 			id = lyra_true_tech.2
 			days = 30
 		}
 	}
 }
-
-#TEST
-country_event = {
-	id = lyra_true_tech.9999
-	hide_window = yes
-	is_triggered_only = yes
-	immediate = {
-		set_variable = {
-			which = true_research_type_physics_research
-			value = value:true_research_type|RESOURCE|physics_research|RESEARCH_SPEED|country_physics_tech_research_speed|
-		}
-		set_variable = {
-			which = true_research_type_society_research
-			value = value:true_research_type|RESOURCE|society_research|RESEARCH_SPEED|country_society_tech_research_speed|
-		}
-		set_variable = {
-			which = true_research_type_engineering_research
-			value = value:true_research_type|RESOURCE|engineering_research|RESEARCH_SPEED|country_engineering_tech_research_speed|
-		}
-		set_variable = {
-			which = true_tradition_base
-			value = value:true_tradition_base
-		}
-		set_variable = {
-			which = true_empire_tradition
-			value = value:true_empire_sprawl|SPRAWL_VALUE|0.002|
-		}
-		log = "physics_research: [owner.true_research_type_physics_research], physics_research: [owner.true_research_type_society_research], physics_research: [owner.true_research_type_engineering_research]"
-		log = "unity base: [owner.true_tradition_base], true_empire_tradition: [owner.true_empire_tradition]"
-		log = "tech: [owner.lyra_true_tech] unity: [owner.lyra_true_tradition]"
-	}
-}
-

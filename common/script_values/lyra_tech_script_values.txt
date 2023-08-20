@@ -72,7 +72,6 @@ true_tradition = { # ( 1 - income / expenses ) * 10
 		mode = add 					#Allows all numerical operations
 	}
 	divide = value:true_empire_sprawl|SPRAWL_VALUE|0.002|
-	mult = value:true_modifier_speed|MODIFIER|country_unity_produces_mult|
 }
 
 
@@ -94,7 +93,7 @@ true_research_type = { #
 true_empire_sprawl = { # empire sprawl div by penalty
 	base = 0
 	add = trigger:empire_sprawl_over_cap #add sprawl
-	min = 0 #above can be negative if below 100 size, set to 0 if blow as no change
+	min = 0 #above can be negative if below 100 size, set to 0 if below as no change
 	mult = $SPRAWL_VALUE$ #reduce to penatly
 	mult = value:true_sprawl_reduction #
 	add = 1
@@ -110,19 +109,8 @@ true_modifier_speed = {
 	add = 1
 }
 
-true_tradition_base = { # ( 1 - income / expenses ) * 10
-	base = 0
-	complex_trigger_modifier = { 	#This lets you get the value of a trigger that you can't use in one-liners because it uses {}
-		trigger = resource_income_compare
-		parameters = { 				#Stick any further information necessary in here, like you'd do within the {} of the trigger normally
-			resource = unity
-			value = 0
-		}
-		mode = add 					#Allows all numerical operations
-	}
-}
 
-true_alloys_max = {
+true_alloys = {
 	base = 0
 	complex_trigger_modifier = { 	#This lets you get the value of a trigger that you can't use in one-liners because it uses {}
 		trigger = resource_income_compare
@@ -135,7 +123,7 @@ true_alloys_max = {
 	mult = value:true_modifier_speed|MODIFIER|country_alloys_produces_mult|
 }
 
-true_pops_max = {
+true_pops = {
 	base = 0
 	add = trigger:num_pops
 }
