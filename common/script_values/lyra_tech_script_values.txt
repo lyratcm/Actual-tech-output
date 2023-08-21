@@ -74,6 +74,23 @@ true_tradition = { # ( 1 - income / expenses ) * 10
 	divide = value:true_empire_sprawl|SPRAWL_VALUE|0.002|
 }
 
+true_alloys = {
+	base = 0
+	complex_trigger_modifier = { 	#This lets you get the value of a trigger that you can't use in one-liners because it uses {}
+		trigger = resource_income_compare
+		parameters = { 				#Stick any further information necessary in here, like you'd do within the {} of the trigger normally
+			resource = alloys
+			value = 0
+		}
+		mode = add 					#Allows all numerical operations
+	}
+	mult = value:true_modifier_speed|MODIFIER|country_alloys_produces_mult|
+}
+
+true_pops = {
+	base = 0
+	add = trigger:num_pops
+}
 
 true_research_type = { #
 	base = 0
@@ -109,21 +126,41 @@ true_modifier_speed = {
 	add = 1
 }
 
-
-true_alloys = {
+delta_true_tech = {
 	base = 0
-	complex_trigger_modifier = { 	#This lets you get the value of a trigger that you can't use in one-liners because it uses {}
-		trigger = resource_income_compare
-		parameters = { 				#Stick any further information necessary in here, like you'd do within the {} of the trigger normally
-			resource = alloys
-			value = 0
-		}
-		mode = add 					#Allows all numerical operations
-	}
-	mult = value:true_modifier_speed|MODIFIER|country_alloys_produces_mult|
+	add = value:true_tech
+	divide = event_target:lyra_true_tech_max.value:true_tech
+	mult = 100
+	subtract = trigger:situation_progress
 }
 
-true_pops = {
-	base = 0
-	add = trigger:num_pops
-}
+#delta_true_tech = {
+#	base = 0
+#	add = value:delta_base_val|MEASURE_VAL|true_tech|
+#	subtract = trigger:situation_progress
+#}
+#
+#delta_true_tradition = {
+#	base = 0
+#	add = value:delta_base_val|MEASURE_VAL|true_tradition|
+#	subtract = trigger:situation_progress
+#}
+#
+#delta_true_alloys = {
+#	base = 0
+#	add = value:delta_base_val|MEASURE_VAL|true_alloys|
+#	subtract = trigger:situation_progress
+#}
+#
+#delta_true_pops = {
+#	base = 0
+#	add = value:delta_base_val|MEASURE_VAL|true_pops|
+#	subtract = trigger:situation_progress
+#}
+#
+#delta_base_val = {
+#	base = 0
+#	add = value:$MEASURE_VAL$
+#	divide = event_target:lyra_$MEASURE_VAL$_max.value:$MEASURE_VAL$
+#	mult = 10
+#}

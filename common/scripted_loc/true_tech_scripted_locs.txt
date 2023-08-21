@@ -1,0 +1,20 @@
+# You can also do this to use script values in loc:
+defined_text = {
+    name = lyra_true_tech_text
+    value = value:true_tech
+}
+
+defined_text = {
+    name = lyra_true_tradition_text
+    value = value:true_tradition
+}
+
+defined_text = {
+    name = lyra_true_alloys_text
+    value = value:true_alloys
+}
+
+defined_text = {
+    name = lyra_true_pops_text
+    value = value:true_pops
+}

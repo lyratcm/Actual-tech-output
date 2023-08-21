@@ -3,26 +3,14 @@ country_event = {
 	id = lyra_true_tech.1
 	hide_window = yes
 	fire_only_once = yes
-
+	trigger = {
+		is_ai = no
+	}
 	immediate = {
-		inverted_switch = {
-			trigger = has_country_flag
-			is_host = { set_country_flag = is_host }
-		}
-		every_country = {
-			set_variable = { which = lyra_true_tech value = value:true_tech }
-			set_variable = { which = lyra_true_tradition value = value:true_tradition }
-			set_variable = { which = lyra_true_alloys value = value:true_alloys }
-			set_variable = { which = lyra_true_pops value = value:true_pops }
-			inverted_switch = {
-				trigger = has_event_chain
-				actual_tech_chain = { begin_event_chain = { event_chain = "actual_tech_chain" target = ROOT } }
-				actual_tech_host_chain = { begin_event_chain = { event_chain = "actual_tech_host_chain" target = ROOT } }
-			}
-		}
+		set_country_flag = is_host
 		country_event = {
 			id = lyra_true_tech.2
-			days = 29
+			days = 30
 		}
 	}
 }
@@ -33,20 +21,13 @@ country_event = {
 	is_triggered_only = yes
 
 	immediate = {
-		#make sure country has event chain - backup
+		#make sure country has event chain
 		inverted_switch = {
 			trigger = has_event_chain
 			actual_tech_chain = { begin_event_chain = { event_chain = "actual_tech_chain" target = ROOT } }
 			actual_tech_host_chain = { begin_event_chain = { event_chain = "actual_tech_host_chain" target = ROOT } }
 		}
-		every_country = {
-			set_variable = { which = lyra_true_tech value = value:true_tech }
-			set_variable = { which = lyra_true_tradition value = value:true_tradition }
-			set_variable = { which = lyra_true_alloys value = value:true_alloys }
-			set_variable = { which = lyra_true_pops value = value:true_pops }
-		}
-		#runs ordered country which looks at all countries and takes the one with the highest (but can be lowest) value of that and then does an effect on that country,
-		# TRUE_VALUE replaces the order_by and event target set values
+		#runs ordered country which looks at all countries and takes the one with the highest (but can be lowest) value of that and then does an effect on that country, TRUE_VALUE replaces the order_by and event target set values
 		ordered_country_true_value = { TRUE_VALUE = true_tech }
 		ordered_country_true_value = { TRUE_VALUE = true_tradition }
 		ordered_country_true_value = { TRUE_VALUE = true_alloys }
