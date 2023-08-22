@@ -3,6 +3,7 @@ delta_to_tech = {
     complete_icon_frame = GFX_situation_outcome_frame_blue
     complete_icon = GFX_situation_outcome_unknown        #Also supports triggered pictures like in events
     category = positive #Affects the tone of various UI elements
+    start_value = 0
     stages = {
         stage_1 = {
             icon = GFX_situation_stage_1
@@ -14,10 +15,101 @@ delta_to_tech = {
     monthly_progress = {
         base = 0
         modifier = {
-            add = value:delta_true_tech
+            add = owner.value:delta_true_tech
+            desc = situation_snow_very_hostile_tt
+        }
+        modifier = {
+            subtract = trigger:situation_progress
             desc = situation_snow_very_hostile_tt
         }
     }
-    on_progress_complete = {			#Effects when Situation's progress has reached completion, You should always call destroy_situation = this from here or from an event fired by here
+    on_progress_complete = {			#Effects when Situation's progress has reached completion, You should always call destroy_situation = this from here or from an event fired by her
+    }
+}
+
+delta_to_tradition = {
+    picture = GFX_evt_arctic
+    complete_icon_frame = GFX_situation_outcome_frame_blue
+    complete_icon = GFX_situation_outcome_unknown        #Also supports triggered pictures like in events
+    category = positive #Affects the tone of various UI elements
+    start_value = 0
+    stages = {
+        stage_1 = {
+            icon = GFX_situation_stage_1
+            icon_background = GFX_situation_stage_frame_blue
+            end = 100
+            custom_tooltip = stage_unknown_effects
+        }
+    }
+    monthly_progress = {
+        base = 0
+        modifier = {
+            add = owner.value:delta_true_tradition
+            desc = situation_snow_very_hostile_tt
+        }
+        modifier = {
+            subtract = trigger:situation_progress
+            desc = situation_snow_very_hostile_tt
+        }
+    }
+    on_progress_complete = {			#Effects when Situation's progress has reached completion, You should always call destroy_situation = this from here or from an event fired by her
+    }
+}
+
+delta_to_alloys = {
+    picture = GFX_evt_arctic
+    complete_icon_frame = GFX_situation_outcome_frame_blue
+    complete_icon = GFX_situation_outcome_unknown        #Also supports triggered pictures like in events
+    category = positive #Affects the tone of various UI elements
+    start_value = 0
+    stages = {
+        stage_1 = {
+            icon = GFX_situation_stage_1
+            icon_background = GFX_situation_stage_frame_blue
+            end = 100
+            custom_tooltip = stage_unknown_effects
+        }
+    }
+    monthly_progress = {
+        base = 0
+        modifier = {
+            add = owner.value:delta_true_alloys
+            desc = situation_snow_very_hostile_tt
+        }
+        modifier = {
+            subtract = trigger:situation_progress
+            desc = situation_snow_very_hostile_tt
+        }
+    }
+    on_progress_complete = {			#Effects when Situation's progress has reached completion, You should always call destroy_situation = this from here or from an event fired by her
+    }
+}
+
+delta_to_pops = {
+    picture = GFX_evt_arctic
+    complete_icon_frame = GFX_situation_outcome_frame_blue
+    complete_icon = GFX_situation_outcome_unknown        #Also supports triggered pictures like in events
+    category = positive #Affects the tone of various UI elements
+    start_value = 0
+    stages = {
+        stage_1 = {
+            icon = GFX_situation_stage_1
+            icon_background = GFX_situation_stage_frame_blue
+            end = 100
+            custom_tooltip = stage_unknown_effects
+        }
+    }
+    monthly_progress = {
+        base = 0
+        modifier = {
+            add = owner.value:delta_true_pops
+            desc = situation_snow_very_hostile_tt
+        }
+        modifier = {
+            subtract = trigger:situation_progress
+            desc = situation_snow_very_hostile_tt
+        }
+    }
+    on_progress_complete = {			#Effects when Situation's progress has reached completion, You should always call destroy_situation = this from here or from an event fired by her
     }
 }

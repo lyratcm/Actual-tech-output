@@ -128,39 +128,31 @@ true_modifier_speed = {
 
 delta_true_tech = {
 	base = 0
-	add = value:true_tech
-	divide = event_target:lyra_true_tech_max.value:true_tech
-	mult = 100
-	subtract = trigger:situation_progress
+	add = owner.value:delta_base_val|MEASURE_VAL|true_tech|
+	max = 99.99
 }
 
-#delta_true_tech = {
-#	base = 0
-#	add = value:delta_base_val|MEASURE_VAL|true_tech|
-#	subtract = trigger:situation_progress
-#}
-#
-#delta_true_tradition = {
-#	base = 0
-#	add = value:delta_base_val|MEASURE_VAL|true_tradition|
-#	subtract = trigger:situation_progress
-#}
-#
-#delta_true_alloys = {
-#	base = 0
-#	add = value:delta_base_val|MEASURE_VAL|true_alloys|
-#	subtract = trigger:situation_progress
-#}
-#
-#delta_true_pops = {
-#	base = 0
-#	add = value:delta_base_val|MEASURE_VAL|true_pops|
-#	subtract = trigger:situation_progress
-#}
-#
-#delta_base_val = {
-#	base = 0
-#	add = value:$MEASURE_VAL$
-#	divide = event_target:lyra_$MEASURE_VAL$_max.value:$MEASURE_VAL$
-#	mult = 10
-#}
+delta_true_tradition = {
+	base = 0
+	add = owner.value:delta_base_val|MEASURE_VAL|true_tradition|
+	max = 99.99
+}
+
+true_alloys = {
+	base = 0
+	add = owner.value:delta_base_val|MEASURE_VAL|true_alloys|
+	max = 99.99
+}
+
+delta_true_pops = {
+	base = 0
+	add = owner.value:delta_base_val|MEASURE_VAL|true_pops|
+	max = 99.99
+}
+
+delta_base_val = {
+	base = 0
+	add = owner.value:$MEASURE_VAL$
+	divide = event_target:lyra_$MEASURE_VAL$_max.value:$MEASURE_VAL$
+	mult = 100
+}

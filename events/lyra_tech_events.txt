@@ -8,6 +8,17 @@ country_event = {
 	}
 	immediate = {
 		set_country_flag = is_host
+		start_situation = {
+			type = delta_to_tech
+			target = owner
+		}
+		every_situation = {
+			limit = { is_situation_type = delta_to_tech }
+			prev = {
+				set_variable = { which = delta_to_tech_progress value = prev.trigger:situation_progress }
+			}
+		}
+
 		country_event = {
 			id = lyra_true_tech.2
 			days = 30
