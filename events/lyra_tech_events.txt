@@ -8,17 +8,6 @@ country_event = {
 	}
 	immediate = {
 		set_country_flag = is_host
-		start_situation = {
-			type = delta_to_tech
-			target = owner
-		}
-		every_situation = {
-			limit = { is_situation_type = delta_to_tech }
-			prev = {
-				set_variable = { which = delta_to_tech_progress value = prev.trigger:situation_progress }
-			}
-		}
-
 		country_event = {
 			id = lyra_true_tech.2
 			days = 30
@@ -47,5 +36,59 @@ country_event = {
 			id = lyra_true_tech.2
 			days = 30
 		}
+	}
+}
+
+country_event = {
+	id = lyra_true_tech.10
+	hide_window = no
+	is_triggered_only = yes
+	title = lyra_true_tech.10.title
+
+	immediate = {
+		set_country_flag = true_tech_is_picking_tracker
+	}
+	after = {
+		remove_country_flag = true_tech_is_picking_tracker
+	}
+	option = {
+		name = lyra_true_tech.10.1
+		trigger = { not = { is_variable_set = delta_to_tech_progress } }
+		set_situation_and_target_true_tech = { TYPE = tech }
+	}
+	option = {
+		name = lyra_true_tech.10.11
+		trigger = { is_variable_set = delta_to_tech_progress }
+		clear_situation_and_target_true_tech = { TYPE = tech }
+	}
+	option = {
+		name = lyra_true_tech.10.2
+		trigger = { not = { is_variable_set = delta_to_tech_progress } }
+		set_situation_and_target_true_tech = { TYPE = tradition }
+	}
+	option = {
+		name = lyra_true_tech.10.21
+		trigger = { is_variable_set = delta_to_tech_progress }
+		clear_situation_and_target_true_tech = { TYPE = tradition }
+	}
+	option = {
+		name = lyra_true_tech.10.3
+		trigger = { not = { is_variable_set = delta_to_tech_progress } }
+		set_situation_and_target_true_tech = { TYPE = alloys }
+	}
+	option = {
+		name = lyra_true_tech.10.31
+		trigger = { is_variable_set = delta_to_tech_progress }
+		clear_situation_and_target_true_tech = { TYPE = alloys }
+	}
+	option = {
+		name = lyra_true_tech.10.4
+		trigger = { not = { is_variable_set = delta_to_tech_progress } }
+		set_situation_and_target_true_tech = { TYPE = pops }
+	}
+	option = {
+		name = lyra_true_tech.10.41
+		trigger = { is_variable_set = delta_to_tech_progress }
+		clear_situation_and_target_true_tech = { TYPE = pops }
 	}
 }

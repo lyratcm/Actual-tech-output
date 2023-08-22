@@ -8,3 +8,26 @@ ordered_country_true_value = {
         save_global_event_target_as = lyra_$TRUE_VALUE$_max
     }
 }
+
+set_situation_and_target_true_tech = {
+    start_situation = {
+        type = delta_to_$TYPE$
+        target = owner
+    }
+    every_situation = {
+        limit = { is_situation_type = delta_to_$TYPE$ }
+        prev = {
+            set_variable = { which = delta_to_$TYPE$_progress value = prev.trigger:situation_progress }
+        }
+    }
+}
+
+clear_situation_and_target_true_tech = {
+    every_situation = {
+        limit = {
+            is_situation_type = delta_to_$TYPE$
+        }
+        destroy_situation = this
+    }
+    clear_variable = delta_to_$TYPE$_progress
+}

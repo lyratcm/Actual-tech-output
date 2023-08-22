@@ -138,7 +138,7 @@ delta_true_tradition = {
 	max = 99.99
 }
 
-true_alloys = {
+delta_true_alloys = {
 	base = 0
 	add = owner.value:delta_base_val|MEASURE_VAL|true_alloys|
 	max = 99.99

@@ -1,0 +1,20 @@
+true_tech_activate_trackers = {
+    length = 1
+    icon = "GFX_edict_type_time"
+
+    potential = {
+        not = {
+            has_country_flag = true_tech_is_picking_tracker
+        }
+    }
+
+    effect = {
+        country_event = {
+            id = lyra_true_tech.10
+        }
+    }
+
+    ai_weight = {
+        weight = 0
+    }
+}
