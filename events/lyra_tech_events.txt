@@ -5,12 +5,17 @@ country_event = {
 	fire_only_once = yes
 	trigger = {
 		is_ai = no
+		any_country = {
+			has_country_flag = is_host
+		}
 	}
 	immediate = {
 		set_country_flag = is_host
-		country_event = {
-			id = lyra_true_tech.2
-			days = 30
+		every_country = { limit = { has_country_flag = is_host } change_variable = { which = is_host_tracker value = 1 } }
+		if = {
+			limit = { check_variable = { which = is_host_tracker value > 1 } }
+			every_country = { limit = { has_country_flag = is_host} remove_country_flag = is_host }
+			set_country_flag = is_host
 		}
 	}
 }
@@ -19,6 +24,20 @@ country_event = {
 	id = lyra_true_tech.2
 	hide_window = yes
 	is_triggered_only = yes
+
+	trigger = {
+		or = {
+			has_country_flag = is_host
+			and = {
+				any_country = {
+					not = {
+						has_country_flag = is_host
+					}
+				}
+				has_country_flag = is_lyra
+			}
+		}
+	}
 
 	immediate = {
 		#make sure country has event chain
@@ -51,44 +70,64 @@ country_event = {
 	after = {
 		remove_country_flag = true_tech_is_picking_tracker
 	}
+	#add tech delta
 	option = {
 		name = lyra_true_tech.10.1
 		trigger = { not = { is_variable_set = delta_to_tech_progress } }
 		set_situation_and_target_true_tech = { TYPE = tech }
+		country_event = { id = lyra_true_tech.10 }
 	}
+	#remove tech delta
 	option = {
 		name = lyra_true_tech.10.11
 		trigger = { is_variable_set = delta_to_tech_progress }
 		clear_situation_and_target_true_tech = { TYPE = tech }
+		country_event = { id = lyra_true_tech.10 }
 	}
+	#add tradition delta
 	option = {
 		name = lyra_true_tech.10.2
-		trigger = { not = { is_variable_set = delta_to_tech_progress } }
+		trigger = { not = { is_variable_set = delta_to_tradition_progress } }
 		set_situation_and_target_true_tech = { TYPE = tradition }
+		country_event = { id = lyra_true_tech.10 }
 	}
+	#remove tradition delta
 	option = {
 		name = lyra_true_tech.10.21
-		trigger = { is_variable_set = delta_to_tech_progress }
+		trigger = { is_variable_set = delta_to_tradition_progress }
 		clear_situation_and_target_true_tech = { TYPE = tradition }
+		country_event = { id = lyra_true_tech.10 }
 	}
+	#add alloys delta
 	option = {
 		name = lyra_true_tech.10.3
-		trigger = { not = { is_variable_set = delta_to_tech_progress } }
+		trigger = { not = { is_variable_set = delta_to_alloys_progress } }
 		set_situation_and_target_true_tech = { TYPE = alloys }
+		country_event = { id = lyra_true_tech.10 }
 	}
+	#remove alloys delta
 	option = {
 		name = lyra_true_tech.10.31
-		trigger = { is_variable_set = delta_to_tech_progress }
+		trigger = { is_variable_set = delta_to_alloys_progress }
 		clear_situation_and_target_true_tech = { TYPE = alloys }
+		country_event = { id = lyra_true_tech.10 }
 	}
+	#add pops delta
 	option = {
 		name = lyra_true_tech.10.4
-		trigger = { not = { is_variable_set = delta_to_tech_progress } }
+		trigger = { not = { is_variable_set = delta_to_pops_progress } }
 		set_situation_and_target_true_tech = { TYPE = pops }
+		country_event = { id = lyra_true_tech.10 }
 	}
+	#remove pops delta
 	option = {
 		name = lyra_true_tech.10.41
-		trigger = { is_variable_set = delta_to_tech_progress }
+		trigger = { is_variable_set = delta_to_pops_progress }
 		clear_situation_and_target_true_tech = { TYPE = pops }
+		country_event = { id = lyra_true_tech.10 }
+	}
+	#close menu
+	option = {
+		name = lyra_true_tech.10.5
 	}
 }

@@ -1,0 +1,11 @@
+on_game_start_country = {
+    events = {
+        lyra_true_tech.1
+    }
+}
+
+on_monthly_pulse_country = {
+    events = {
+        lyra_true_tech.2
+    }
+}
