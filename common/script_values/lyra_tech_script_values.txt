@@ -84,7 +84,6 @@ true_alloys = {
 		}
 		mode = add 					#Allows all numerical operations
 	}
-	mult = value:true_modifier_speed|MODIFIER|country_alloys_produces_mult|
 }
 
 true_pops = {
@@ -153,6 +152,6 @@ delta_true_pops = {
 delta_base_val = {
 	base = 0
 	add = owner.value:$MEASURE_VAL$
-	divide = event_target:lyra_$MEASURE_VAL$_max.value:$MEASURE_VAL$
+	divide = event_target:lyra_$MEASURE_VAL$1_max.value:$MEASURE_VAL$
 	mult = 100
 }

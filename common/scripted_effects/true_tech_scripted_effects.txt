@@ -5,7 +5,23 @@ ordered_country_true_value = {
         }
         position = 0
         order_by = value:$TRUE_VALUE$
-        save_global_event_target_as = lyra_$TRUE_VALUE$_max
+        save_global_event_target_as = lyra_$TRUE_VALUE$1_max
+    }
+    ordered_country = {
+        limit = {
+            is_country_type = default
+        }
+        position = 1
+        order_by = value:$TRUE_VALUE$
+        save_global_event_target_as = lyra_$TRUE_VALUE$2_max
+    }
+    ordered_country = {
+        limit = {
+            is_country_type = default
+        }
+        position = 2
+        order_by = value:$TRUE_VALUE$
+        save_global_event_target_as = lyra_$TRUE_VALUE$3_max
     }
 }
 

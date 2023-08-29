@@ -7,5 +7,6 @@ on_game_start_country = {
 on_monthly_pulse_country = {
     events = {
         lyra_true_tech.2
+        lyra_true_tech.21
     }
 }

@@ -5,17 +5,30 @@ country_event = {
 	fire_only_once = yes
 	trigger = {
 		is_ai = no
-		any_country = {
-			has_country_flag = is_host
+		or = {
+			and = {
+				#if lyra is absent pick a host
+				not = { has_global_flag = host_picked }
+				any_country = {
+					not = { has_country_flag = is_lyra }
+				}
+			}
+			and = {
+				#if she is use her country
+				not = { has_global_flag = host_picked }
+				has_country_flag = is_lyra
+			}
 		}
 	}
 	immediate = {
-		set_country_flag = is_host
-		every_country = { limit = { has_country_flag = is_host } change_variable = { which = is_host_tracker value = 1 } }
 		if = {
-			limit = { check_variable = { which = is_host_tracker value > 1 } }
-			every_country = { limit = { has_country_flag = is_host} remove_country_flag = is_host }
+			limit = { not = { has_country_flag = is_lyra } }
 			set_country_flag = is_host
+		}
+		set_global_flag = host_picked
+		every_country = {
+			begin_event_chain = { event_chain = "actual_tech_chain" target = owner }
+			begin_event_chain = { event_chain = "actual_tech_host_chain" target = owner }
 		}
 	}
 }
@@ -25,38 +38,47 @@ country_event = {
 	hide_window = yes
 	is_triggered_only = yes
 
+	immediate = {
+		#make sure country has event chain
+		if =  {
+			limit = { not = { has_event_chain = actual_tech_chain } }
+			begin_event_chain = { event_chain = "actual_tech_chain" target = owner }
+		}
+		if =  {
+			limit = { not = { has_event_chain = actual_tech_host_chain } }
+			begin_event_chain = { event_chain = "actual_tech_host_chain" target = owner }
+		}
+	}
+}
+
+country_event = {
+	id = lyra_true_tech.21
+	hide_window = yes
+	is_triggered_only = yes
+
 	trigger = {
 		or = {
 			has_country_flag = is_host
 			and = {
 				any_country = {
-					not = {
-						has_country_flag = is_host
-					}
+					not = { has_country_flag = is_host }
 				}
+				#if lyra is in use that flag (will always be set)
 				has_country_flag = is_lyra
 			}
 		}
 	}
 
 	immediate = {
-		#make sure country has event chain
-		inverted_switch = {
-			trigger = has_event_chain
-			actual_tech_chain = { begin_event_chain = { event_chain = "actual_tech_chain" target = ROOT } }
-			actual_tech_host_chain = { begin_event_chain = { event_chain = "actual_tech_host_chain" target = ROOT } }
-		}
 		#runs ordered country which looks at all countries and takes the one with the highest (but can be lowest) value of that and then does an effect on that country, TRUE_VALUE replaces the order_by and event target set values
 		ordered_country_true_value = { TRUE_VALUE = true_tech }
 		ordered_country_true_value = { TRUE_VALUE = true_tradition }
 		ordered_country_true_value = { TRUE_VALUE = true_alloys }
 		ordered_country_true_value = { TRUE_VALUE = true_pops }
-		country_event = {
-			id = lyra_true_tech.2
-			days = 30
-		}
 	}
+
 }
+
 
 country_event = {
 	id = lyra_true_tech.10
@@ -126,8 +148,16 @@ country_event = {
 		clear_situation_and_target_true_tech = { TYPE = pops }
 		country_event = { id = lyra_true_tech.10 }
 	}
-	#close menu
+	#fix situation logs
 	option = {
 		name = lyra_true_tech.10.5
+		trigger = { or = { not = { has_event_chain = actual_tech_host_chain } not = { has_event_chain = actual_tech_chain } } }
+		begin_event_chain = { event_chain = "actual_tech_chain" target = owner }
+		begin_event_chain = { event_chain = "actual_tech_host_chain" target = owner }
+		country_event = { id = lyra_true_tech.10 }
+	}
+	#close menu
+	option = {
+		name = lyra_true_tech.10.6
 	}
 }
